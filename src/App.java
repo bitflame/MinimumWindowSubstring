@@ -66,7 +66,7 @@ public class App {
 
     public static String minimumWindow(String s, String t) {
         if (t.length() > s.length() || t == null || s == null)
-            return " ";
+            return "";
         HashMap<Character, Integer> sMap = new HashMap<>();
         HashMap<Character, Integer> tMap = new HashMap<>();
         int haveCounter = 0, needCounter = t.length(), index = 0, minLen = s.length(), tempValue = 0, startOfString = 0,
@@ -149,6 +149,10 @@ public class App {
         s = "aa";
         System.out.println(minimumWindow(s, t));
         t = "aa";
-        System.out.println(minWindow(s, t));
+        s = "a";
+        System.out.println("Output of s = \"a\" and t=\"aa\" :"+minWindow(s, t));
+        t = "b";
+        s = "a";
+        System.out.println("Output of s = \"a\" and t=\"b\" :"+minWindow(s, t));
     }
 }
