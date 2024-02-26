@@ -97,7 +97,7 @@ public class App {
                 if (minLen > index - startOfString) {
                     minLen = index - startOfString;
                     res[0] = startOfString;
-                    res[1] = index;
+                    res[1] = ++index;
                 }
                 currentChar = sChar[startOfString];
                 tempValue = sMap.get(currentChar);
@@ -108,11 +108,6 @@ public class App {
                 if (startOfString < sLength) {
                     currentChar = sChar[startOfString];
                 }
-                // try {
-                // currentChar = sChar[startOfString];
-                // } catch (Exception e) {
-                // System.out.println(e.getMessage() + "Tried to access the end of String t");
-                // }
                 while (tMap.get(currentChar) == null) {
                     startOfString++;
                     currentChar = sChar[startOfString];
@@ -120,7 +115,7 @@ public class App {
             }
             index++;
         }
-        return s.substring(res[0], ++res[1]);
+        return s.substring(res[0], res[1]);
     }
 
     public static String miniWindow(String s, String t) {
@@ -150,9 +145,14 @@ public class App {
         System.out.println(minimumWindow(s, t));
         t = "aa";
         s = "a";
-        System.out.println("Output of s = \"a\" and t=\"aa\" :"+minWindow(s, t));
+        System.out.println("Output of s = \"a\" and t=\"aa\" :" + minWindow(s, t));
         t = "b";
         s = "a";
-        System.out.println("Output of s = \"a\" and t=\"b\" :"+minWindow(s, t));
+        System.out.println("Output of s = \"a\" and t=\"b\" :" + minWindow(s, t));
+        t = "a";
+        s = "ab";
+        System.out.println("Output of s = \"ab\" and t=\"a\" Expecting \"a\" Getting:" + minWindow(s, t));
+        t = "b";
+        System.out.println("Output of s = \"ab\" and t=\"b\" Expecting \"b\" Getting:" + minWindow(s, t));
     }
 }
