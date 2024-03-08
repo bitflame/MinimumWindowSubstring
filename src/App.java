@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class App {
     // from solutions in leetcode
@@ -204,19 +206,18 @@ public class App {
     }
 
     public static String fouthTry(String s, String t) {
-        if (t == null || s == null)
+        if (t == null || s == null || s.length() < t.length())
             return "";
         if (s.equals(t))
             return s;
         HashMap<Character, Integer> sMap = new HashMap<>();
         HashMap<Character, Integer> tMap = new HashMap<>();
         int index = 0, minLen = s.length(), tempValue = 0, startOfString = Integer.MAX_VALUE, sLength = s.length(),
-                neededCharsIndex = 0, lowIndex = 0, startString = 0, endString = s.length();
-
+                lowIndex = 0, startString = 0, endString = 0;
         char currentChar;
         char[] sChar = s.toCharArray();
         char[] tChar = t.toCharArray();
-        int[] neededChars = new int[sLength];
+        List<Integer> needChar = new ArrayList<>();
         for (char c : tChar) {
             if (!tMap.containsKey(c))
                 tMap.put(c, 1);
@@ -243,10 +244,12 @@ public class App {
                     tempValue = sMap.get(currentChar);
                     sMap.put(currentChar, ++tempValue);
                 }
-                neededChars[neededCharsIndex] = index;
-                neededCharsIndex++;
+                needChar.add(index);
                 if (startOfString > index)
                     startOfString = index;
+                else if (sChar[needChar.get(lowIndex)] == currentChar)
+                    startOfString = index;
+
             }
             // might have to change the if statement to a while loop while(sMap.size() ==
             // tMap.size())
@@ -258,9 +261,9 @@ public class App {
                 }
                 currentChar = sChar[startOfString];
                 // lowIndex keeps track of the value startOfString was set to last
-                if (lowIndex < index) {
+                if (lowIndex < needChar.size() - 1) {
                     lowIndex++;
-                    startOfString = neededChars[lowIndex];
+                    startOfString = needChar.get(lowIndex);
                 }
                 tempValue = sMap.get(currentChar);
                 if (tempValue == 1)
@@ -279,8 +282,8 @@ public class App {
         // for (int i : neededChars) {
         // System.out.println(i);
         // }
-
-        return s.substring(startString, endString + 1);
+        return (startString <= endString) ? s.substring(startString, endString + 1) : "";
+        // return s.substring(startString, endString + 1);
     }
 
     public static void main(String[] args) throws Exception {
