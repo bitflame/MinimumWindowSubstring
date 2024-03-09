@@ -231,9 +231,9 @@ public class App {
         // System.out.print(tMap.get(c) + " of: " + c + " ");
         // }
         // System.out.println();
+
         while (index < sLength) {
             currentChar = sChar[index];
-            // add the key only if s does not have it or s has less
             if (tMap.containsKey(currentChar)) {
                 if (!sMap.containsKey(currentChar)) {
                     sMap.put(currentChar, 1);
@@ -249,12 +249,13 @@ public class App {
                     startOfString = index;
                 else if (sChar[needChar.get(lowIndex)] == currentChar)
                     startOfString = index;
+
             }
             // might have to change the if statement to a while loop while(sMap.size() ==
             // tMap.size())
-            // I do not think I deal with more than one of each key the way I should
-            // if (sMap.size() == tMap.size()) {
-            if (sMap.equals(tMap)) {
+            // I do not think I deal with more than one of each key the way I should 
+            if (sMap.size() == tMap.size()) {
+                if (sMap.equals(tMap))
                 if (index - startOfString > 0 || minLen > index - startOfString) {
                     minLen = index - startOfString;
                     startString = startOfString;
