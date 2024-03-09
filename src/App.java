@@ -213,7 +213,7 @@ public class App {
         HashMap<Character, Integer> sMap = new HashMap<>();
         HashMap<Character, Integer> tMap = new HashMap<>();
         int index = 0, minLen = s.length(), tempValue = 0, startOfString = Integer.MAX_VALUE, sLength = s.length(),
-                lowIndex = 0, startString = 0, endString = 0;
+                lowIndex = 0, startString = Integer.MAX_VALUE, endString = 0;
         char currentChar;
         char[] sChar = s.toCharArray();
         char[] tChar = t.toCharArray();
@@ -231,9 +231,9 @@ public class App {
         // System.out.print(tMap.get(c) + " of: " + c + " ");
         // }
         // System.out.println();
-
         while (index < sLength) {
             currentChar = sChar[index];
+            // add the key only if s does not have it or s has less
             if (tMap.containsKey(currentChar)) {
                 if (!sMap.containsKey(currentChar)) {
                     sMap.put(currentChar, 1);
@@ -249,11 +249,12 @@ public class App {
                     startOfString = index;
                 else if (sChar[needChar.get(lowIndex)] == currentChar)
                     startOfString = index;
-
             }
             // might have to change the if statement to a while loop while(sMap.size() ==
             // tMap.size())
-            if (sMap.size() == tMap.size()) {
+            // I do not think I deal with more than one of each key the way I should
+            // if (sMap.size() == tMap.size()) {
+            if (sMap.equals(tMap)) {
                 if (index - startOfString > 0 || minLen > index - startOfString) {
                     minLen = index - startOfString;
                     startString = startOfString;
@@ -282,7 +283,7 @@ public class App {
         // for (int i : neededChars) {
         // System.out.println(i);
         // }
-        return (startString <= endString) ? s.substring(startString, endString + 1) : "";
+        return (startString < Integer.MAX_VALUE) ? s.substring(startString, endString + 1) : "";
         // return s.substring(startString, endString + 1);
     }
 
@@ -331,13 +332,16 @@ public class App {
         s = "bbba";
         t = "abb";
         System.out.println(
-                "Test 11 - Output of s = \"bbba\" and t=\"abb\" Expecting: \"bba\" Getting:" + "\"" + fouthTry(s, t)
+                "Test 11 - Output of s = \"bbba\" and t=\"abb\" Expecting: \"ba\" Getting:" + "\"" + fouthTry(s, t)
                         + "\"");
         s = "bbaac";
         t = "aba";
         System.out.println(
                 "Test 12 - Output of s = \"bbaac\" and t=\"aba\" Expecting: \"baa\" Getting:" + "\"" + fouthTry(s, t)
                         + "\"");
-
+        s = "acbbaca";
+        t = "aba";
+        System.out.println(
+                "Test 13 - s=\"acbbaca\" and t=\"aba\" Expecting: \"baca\" Getting: \"" + fouthTry(s, t) + "\"");
     }
 }
