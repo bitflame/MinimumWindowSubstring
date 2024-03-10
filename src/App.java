@@ -171,6 +171,7 @@ public class App {
                 intestingCharacters[intestingCharactersIndex] = index;
                 intestingCharactersIndex++;
                 tempValue = sMap.get(currentChar);
+            // You can have as many of a kind as there are as long as you are missing another kind but not the first or last match
                 haveCounter++;
                 sMap.put(currentChar, ++tempValue);
                 if (startOfString == Integer.MAX_VALUE)
@@ -180,7 +181,7 @@ public class App {
             if (haveCounter == needCounter) {
                 // move startOfString as long as sMap has more or equal of each item as tMap
                 // remove from the beginning while the item is not in t or s has more than
-                if (minLen >= index - startOfString && sMap.equals(tMap)) {
+                if (minLen >= index - startOfString) {
                     minLen = index - startOfString;
                     lowIndex = startOfString;
                     highIndex = index + 1;
@@ -345,14 +346,18 @@ public class App {
                         + "\"");
         s = "bbaac";
         t = "aba";
-        System.out.println(
-                "Test 12 - Output of s = \"bbaac\" and t=\"aba\" Expecting: \"baa\" Getting:" + "\""
-                        + minWindowLeetCode(s, t)
-                        + "\"");
+        System.out.println("Test 12 - Output of s = \"bbaac\" and t=\"aba\" Expecting: \"baa\" Getting:" + "\""
+                + minWindowLeetCode(s, t) + "\"");
         s = "acbbaca";
         t = "aba";
         System.out.println(
                 "Test 13 - s=\"acbbaca\" and t=\"aba\" Expecting: \"baca\" Getting: \"" + minWindowLeetCode(s, t)
+                        + "\"");
+        s = "aaaaaaaaaaaabbbbbcdd";
+        t = "abcdd";
+        System.out.println(
+                "Test 14 - s=\"aaaaaaaaaaaabbbbbcdd\" and t=\"abcdd\" Expecting: \"abbbbbcdd\" Getting: \""
+                        + minWindowLeetCode(s, t)
                         + "\"");
     }
 }
