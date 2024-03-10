@@ -189,7 +189,8 @@ public class App {
                 tempValue = sMap.get(currentChar);
                 sMap.put(currentChar, tempValue - 1);
                 haveCounter--;
-                startOfString = intestingCharacters[nextStartOfString];
+                if (nextStartOfString < intestingCharacters.length - 1)
+                    startOfString = intestingCharacters[nextStartOfString];
                 nextStartOfString++;
             }
             index++;
