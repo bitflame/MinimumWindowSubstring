@@ -180,7 +180,7 @@ public class App {
             if (haveCounter == needCounter) {
                 // move startOfString as long as sMap has more or equal of each item as tMap
                 // remove from the beginning while the item is not in t or s has more than
-                if (minLen >= index - startOfString) {
+                if (minLen >= index - startOfString && sMap.equals(tMap)) {
                     minLen = index - startOfString;
                     lowIndex = startOfString;
                     highIndex = index + 1;
